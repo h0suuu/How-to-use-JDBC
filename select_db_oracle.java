@@ -2,7 +2,7 @@ package db_test;
 import java.sql.*;
 
 public class select_db_oracle {
-	  public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	  	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	    public static final String USERNAME = "sys as sysdba";
 	    private static final String PASSWORD = "1234";
 
@@ -20,7 +20,7 @@ public class select_db_oracle {
 	        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 	            System.out.println("데이터베이스 연결 성공");
 
-	            // Specify the ID you want to retrieve
+	            // 검색할 ID 지정
 	            int targetId = 18;
 
 	            // SELECT 데이터 based on the ID

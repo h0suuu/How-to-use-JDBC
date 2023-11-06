@@ -1,7 +1,7 @@
 package db_test;
 import java.sql.*;
 
-public class insert_db_mysql {
+public class delete_db_mysql {
     public static final String URL = "jdbc:mysql://127.0.0.1:3306/jdbc_db_mysql";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "1234qwer";
@@ -22,49 +22,32 @@ public class insert_db_mysql {
             
             
             
+            
          // SELECT 데이터
-            String selectSql2 = "SELECT * FROM jdbc_table_mysql";
-            Statement stmt2 = conn.createStatement();
-            ResultSet rs2 = stmt2.executeQuery(selectSql2);
+            String selectSql1 = "SELECT * FROM jdbc_table_mysql";
+            Statement stmt1 = conn.createStatement();
+            ResultSet rs1 = stmt1.executeQuery(selectSql1);
 
-            while (rs2.next()) {
-                String name = rs2.getString("name");
-                int age = rs2.getInt("age");
-                int sid = rs2.getInt("sid");
-                String phone = rs2.getString("phonenumber");
+            while (rs1.next()) {
+                String name = rs1.getString("name");
+                int age = rs1.getInt("age");
+                int sid = rs1.getInt("sid");
+                String phone = rs1.getString("phonenumber");
 
                 System.out.println("Name: " + name + ", Age: " + age + ", ID: " + sid + ", Phone: " + phone);
             }
             
             System.out.println("");
-            int targetid = 18;
-            // 중복여부 검사
-            String selectSql1 = "SELECT * FROM jdbc_table_mysql WHERE sid = ?";
-            PreparedStatement selectStatement = conn.prepareStatement(selectSql1);
-            selectStatement.setInt(1, targetid);
-            ResultSet rs1 = selectStatement.executeQuery();
+            
+            
+            // DELETE 데이터
+            String deleteSql = "DELETE FROM jdbc_table_mysql WHERE sid = ?";
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteSql);
+            deleteStatement.setString(1, "18"); // Specify the ID of the row to delete
 
-            if (rs1.next()) {
-                System.out.println("Row with sid " + targetid+ " already exists. Insertion skipped.");
-            } else {
-                System.out.println("");
-                
-                // INSERT 데이터
-                String insertSql = "INSERT INTO jdbc_table_mysql (name, age, sid, phonenumber) VALUES (?, ?, ?, ?)";
-                PreparedStatement pstmt = conn.prepareStatement(insertSql);
-
-                // 변수들 정의
-                pstmt.clearParameters();
-                pstmt.setString(1, "Horatio");
-                pstmt.setInt(2, 20);
-                pstmt.setInt(3, targetid);
-                pstmt.setString(4, "010-1111-1111");
-
-                int numRows = pstmt.executeUpdate();
-                System.out.println("Inserted " + numRows + " rows");
-            }
-
+            int deletedRows = deleteStatement.executeUpdate();
             System.out.println("");
+            System.out.println("Deleted " + deletedRows + " rows");
 
             // SELECT 데이터
             String selectSql = "SELECT * FROM jdbc_table_mysql";
