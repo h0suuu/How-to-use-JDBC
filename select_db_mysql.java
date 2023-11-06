@@ -21,7 +21,7 @@ public class select_db_mysql {
 	        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 	            System.out.println("데이터베이스 연결 성공");
 	            
-	            // Specify the ID you want to retrieve
+	            // 검색할 ID 지정
 	            int targetId = 18;
 
 	            // SELECT 데이터 based on the ID
